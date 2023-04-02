@@ -89,7 +89,7 @@ if(isset($_POST['login']))
     $password=md5($_POST['password']);   
   
     $run =  mysqli_query($con, "select * from users WHERE user_id='$user_id' AND password='$password'");  
-	$xrun = mysqli_fetch_assoc($run);
+	$xrun = mysqli_fetch_array($run);
     if(mysqli_num_rows($run) > 0)  
     {  
         echo "<script>window.open('index.php','_self')</script>";  
