@@ -44,7 +44,8 @@ session_start();
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.html"> <h4>APLIKASI KOPERASI</h4></a>
+                                <a class="text-center" href="index.html"> <h2>APLIKASI KOPERASI</h2></a>
+                                <a class="text-center" href="index.html"> <h4>PT. Megariamas Sentosa</h4></a>
         
                                 <form class="mt-5 mb-5 login-input" method="post" action="login.php">
                                     <div class="form-group">
@@ -53,9 +54,9 @@ session_start();
                                     <div class="form-group">
                                         <input type="password" class="form-control" name="password" placeholder="Password">
                                     </div>
-                                    <button class="btn login-form__btn submit w-100" type="submit" value="Login" name="login">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100" type="submit" value="Login" name="login">Masuk</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? Contact your Administrator.</p>
+                                <p class="mt-5 login-form__footer">Belum punya akun? hubungi Administrator.</p>
                             </div>
                         </div>
                     </div>
