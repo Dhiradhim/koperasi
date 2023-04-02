@@ -1,5 +1,21 @@
 <?php
 
+function kode_pinjam($no,$tgl_pinjaman){
+  $tgl= explode("-", $tgl_pinjaman);
+  $hasil = 'PN/'.$no.'/'.$tgl[1].'/'.$tgl[2];
+  return $hasil;
+}
+function kode_simpan($no,$tgl_simpanan){
+  $tgl= explode("-", $tgl_simpanan);
+  $hasil = 'SM/'.$no.'/'.$tgl[1].'/'.$tgl[2];
+  return $hasil;
+}
+function kode_angsuran($no,$tgl_angsuran){
+  $tgl= explode("-", $tgl_angsuran);
+  $hasil = 'AS/'.$no.'/'.$tgl[1].'/'.$tgl[2];
+  return $hasil;
+}
+
 function rp($angka){
     $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
     return $hasil_rupiah;

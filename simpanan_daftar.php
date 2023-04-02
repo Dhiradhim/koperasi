@@ -36,6 +36,7 @@ include ('sidebar.php');
                                                 <th>No</th>
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
+                                                <th>No. Simpanan</th>
                                                 <th>Tanggal Simpanan</th>
                                                 <th>Jumlah Simpanan</th> 
                                                 <?php if ($session_id=='1'){ ?>    
@@ -53,6 +54,7 @@ include ('sidebar.php');
                                                 <td><?=$no?></td>
                                                 <td><?=$no_anggota?></td>
                                                 <td><?=$nama?></td>
+                                                <td><?=kode_simpan($id,$tgl_simpanan)?></td>
                                                 <td><?=$tgl_simpanan?></td>
                                                 <td><?=$jml_simpanan2?></td>
                                                 <?php if ($session_id=='1'){ ?>
@@ -74,6 +76,7 @@ include ('sidebar.php');
                                             <th>No</th>
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
+                                                <th>No. Simpanan</th>
                                                 <th>Tanggal Simpanan</th>
                                                 <th>Jumlah Simpanan</th>
                                                 <?php if ($session_id=='1'){ ?>

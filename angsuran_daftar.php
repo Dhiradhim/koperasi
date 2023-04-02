@@ -16,9 +16,9 @@ include ('sidebar.php');
                             <?php
                                 $no = 1;
                                 if ($session_id=='1'){
-                                    $query = "SELECT a.*, an.nama_anggota FROM angsuran as a, anggota as an WHERE a.no_anggota=an.no_anggota";
+                                    $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman";
                                 } else {   
-                                    $query = "SELECT a.*, an.nama_anggota FROM angsuran as a, anggota as an WHERE a.no_anggota=an.no_anggota AND a.no_anggota='$session_id'";
+                                    $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman AND a.no_anggota='$session_id'";
                                 }
                                 $sql = mysqli_query($con, $query);
                                 $data = mysqli_fetch_array($sql);
@@ -37,7 +37,9 @@ include ('sidebar.php');
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
                                                 <th>No. Pinjaman</th>
+                                                <th>No. Angsuran</th>
                                                 <th>Tanggal Angsuran</th>
+                                                <th>Angsuran Ke</th>
                                                 <th>Jumlah Angsuran</th>
                                                 <?php if ($session_id=='1'){ ?>
                                                 <th>Action</th>
@@ -53,8 +55,10 @@ include ('sidebar.php');
                                                 <td><?=$no?></td>
                                                 <td><?=$no_anggota?></td>
                                                 <td><?=$nama_anggota?></td>
-                                                <td><?=$no_pinjaman?></td>
+                                                <td><?=kode_pinjam($no_pinjaman,$tgl_pinjaman)?></td>
+                                                <td><?=kode_angsuran($id,$tgl_angsuran)?></td>
                                                 <td><?=$tgl_angsuran?></td>
+                                                <td><?=$angsuran_ke?></td>
                                                 <td><?=rp($jml_angsuran)?></td>
                                                 <?php if ($session_id=='1'){ ?>
                                                 <td>
@@ -76,6 +80,8 @@ include ('sidebar.php');
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
                                                 <th>No. Pinjaman</th>
+                                                <th>No. Angsuran</th>
+                                                <th>Angsuran Ke</th>
                                                 <th>Tanggal Angsuran</th>
                                                 <th>Jumlah Angsuran</th>
                                                 <?php if ($session_id=='1'){ ?>

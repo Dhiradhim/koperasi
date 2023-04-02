@@ -34,7 +34,8 @@ include ('sidebar.php');
                                                 <th>No</th>
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
-                                                <th>Tanggal Pinjaman</th>
+                                                <th>No. Pinjaman</th>
+                                                <th>Tanggal</th>
                                                 <th>Lama Bayar</th>
                                                 <th>Jumlah Pinjaman</th>                                                
                                                 <th>Jumlah Pembayaran</th>
@@ -57,6 +58,7 @@ include ('sidebar.php');
                                                 <td><?=$no?></td>
                                                 <td><?=$no_anggota?></td>
                                                 <td><?=$nama?></td>
+                                                <td><?=kode_pinjam($no_pinjaman,$tgl_pinjaman)?></td>
                                                 <td><?=$tgl_pinjaman?></td>
                                                 <td><?=$lama_pinjaman?> bulan</td>
                                                 <td><?=$jml_pinjaman2?></td>
@@ -84,7 +86,8 @@ include ('sidebar.php');
                                             <th>No</th>
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
-                                                <th>Tanggal Pinjaman</th>
+                                                <th>No. Pinjaman</th>
+                                                <th>Tanggal</th>
                                                 <th>Lama Bayar</th>
                                                 <th>Jumlah Pinjaman</th>                                                
                                                 <th>Jumlah Pembayaran</th>
