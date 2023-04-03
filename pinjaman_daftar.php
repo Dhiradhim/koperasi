@@ -36,11 +36,13 @@ include ('sidebar.php');
                                                 <th>Nama Anggota</th>
                                                 <th>No. Pinjaman</th>
                                                 <th>Tanggal</th>
-                                                <th>Lama Bayar</th>
+                                                <th>Lama Pinjaman</th>
+                                                <th>Bunga</th>
                                                 <th>Jumlah Pinjaman</th>                                                
                                                 <th>Jumlah Pembayaran</th>
                                                 <th>Angsuran</th>
                                                 <th>Status</th>
+                                                <th>Status Pembayaran</th>
                                                 <?php if ($session_id=='1'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
@@ -61,10 +63,12 @@ include ('sidebar.php');
                                                 <td><?=kode_pinjam($no_pinjaman,$tgl_pinjaman)?></td>
                                                 <td><?=$tgl_pinjaman?></td>
                                                 <td><?=$lama_pinjaman?> bulan</td>
+                                                <td><?=$bunga?>%</td>
                                                 <td><?=$jml_pinjaman2?></td>
                                                 <td><?=$totalbayar?></td>
                                                 <td><?=$angsuran_ke?> kali</td>
                                                 <td><?=status($status)?></td>
+                                                <td><?=status_pinjaman($no_pinjaman)?></td>
                                                 <?php if ($session_id=='1'){ ?>
                                                 <td>
                                                 <button type="button" class="btn mb-1 btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
@@ -88,11 +92,13 @@ include ('sidebar.php');
                                                 <th>Nama Anggota</th>
                                                 <th>No. Pinjaman</th>
                                                 <th>Tanggal</th>
-                                                <th>Lama Bayar</th>
+                                                <th>Lama Pinjaman</th>
+                                                <th>Bunga</th>
                                                 <th>Jumlah Pinjaman</th>                                                
                                                 <th>Jumlah Pembayaran</th>
                                                 <th>Angsuran</th>
                                                 <th>Status</th>
+                                                <th>Status Pembayaran</th>
                                                 <?php if ($session_id=='1'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>

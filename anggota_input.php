@@ -13,7 +13,13 @@ include ('sidebar.php');
                             <div class="card-body">
                                 <center><h1>Form Pendaftaran Anggota</h1></center>
                                 <br><br>
-                                
+                                <!-- QUERY -->
+                                <?php
+                                $query = "SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db_koperasi' AND TABLE_NAME = 'users'";
+                                $sql = mysqli_query($con, $query);
+                                $data = mysqli_fetch_array($sql);
+                                $count = $data["AUTO_INCREMENT"];
+                                ?>
                                 <div class="basic-form">
                                     <form method="post" action="anggota_save.php">
                                     <h4 class="card-title">User Account</h4>
@@ -34,11 +40,19 @@ include ('sidebar.php');
                                         <br><br>
                                     <h4 class="card-title">Detail Anggota</h4>
                                         <div class="form-row">
-                                            <div class="form-group col-md-8">
+                                            <div class="form-group col-md-2">
+                                                <label>No Anggota</label>
+                                                <input type="text" disabled required class="form-control" name="no_anggota" value="<?=$count?>">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label>No Karyawan</label>
+                                                <input type="text" disabled required class="form-control" name="no_anggota" value="<?=$count?>">
+                                            </div>
+                                            <div class="form-group col-md-6">
                                                 <label>Nama Anggota</label>
                                                 <input type="text" required class="form-control" name="nama_anggota" placeholder="Nama Lengkap">
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-2">
                                             <label>Jenis Kelamin</label>
                                             <select class="form-control" required id="sel1" name="jk">
                                                 <option value="" hidden>Pilih</option>

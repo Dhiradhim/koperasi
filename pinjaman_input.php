@@ -61,17 +61,13 @@ include ('sidebar.php');
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label>Lama Pinjaman</label>
-                                                <div class="input-group mb-3">
-                                                    <input type="text" class="form-control" name="lama_pinjaman" placeholder="Lama Pinjaman">
-                                                    <div class="input-group-append"><span class="input-group-text">bulan</span>
-                                                </div>
+                                                <select class="form-control" required id="sel1" name="lama_pinjaman">
+                                                    <option value="" hidden>Pilih</option>
+                                                    <option value="3" >3 Bulan (Bunga 0%)</option>
+                                                    <option value="6" >6 Bulan (Bunga 3%)</option>
+                                                    <option value="12" >12 Bulan (Bunga 5%)</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            
-                                        </div>
-                                        <div class="form-row">
-                                            
                                         </div>
                                         </div>
                                         <button type="submit" class="btn btn-success">Simpan</button>

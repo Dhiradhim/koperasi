@@ -29,6 +29,7 @@ include ('sidebar.php');
                                             <tr>
                                                 <th>No</th>
                                                 <th>No. Anggota</th>
+                                                <th>No. Karyawan</th>
                                                 <th>Nama Anggota</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>Alamat</th>
@@ -44,6 +45,7 @@ include ('sidebar.php');
                                             <tr>
                                                 <td><?=$no?></td>
                                                 <td><?=$no_anggota?></td>
+                                                <td><?=$no_karyawan?></td>
                                                 <td><?=$nama_anggota?></td>
                                                 <td><?=$jk?></td>
                                                 <td><?=$alamat?></td>
@@ -65,6 +67,7 @@ include ('sidebar.php');
                                                 <th>No</th>
                                                 <th>No. Anggota</th>
                                                 <th>Nama Anggota</th>
+                                                <th>Nama Karyawan</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>Alamat</th>
                                                 <th>No. Hp</th>

@@ -33,6 +33,20 @@ function status($stat){
       $hasil = '<button type="button" class="btn btn-danger btn-sm">Denied</button>';
     }
     return $hasil;
+}function status_pinjaman($no_pinjaman){
+  include('koneksi.php');
+  $query = "SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjaman'";
+  $sql = mysqli_query($con, $query);
+  $data = mysqli_fetch_array($sql);
+  $query2 = "SELECT jml_pinjaman as jml2 FROM pinjaman WHERE no_pinjaman='$no_pinjaman'";
+  $sql2 = mysqli_query($con, $query2);
+  $data2 = mysqli_fetch_array($sql2);
+  if ($data2['jml2']==$data['jml']){
+    $hasil = '<button type="button" class="btn btn-success btn-sm">Lunas</button>';
+  } else {
+    $hasil = '<button type="button" class="btn btn-warning btn-sm">Belum Lunas</button>';
+  }
+    return $hasil;
 }
 
 function totalbayar($no_pinjaman){
