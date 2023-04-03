@@ -33,7 +33,8 @@ function status($stat){
       $hasil = '<button type="button" class="btn btn-danger btn-sm">Denied</button>';
     }
     return $hasil;
-}function status_pinjaman($no_pinjaman){
+}
+function status_pinjaman($no_pinjaman){
   include('koneksi.php');
   $query = "SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjaman'";
   $sql = mysqli_query($con, $query);
