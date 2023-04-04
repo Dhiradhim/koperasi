@@ -68,5 +68,4 @@ function angsuran_ke($no_pinjaman){
   $x=($data['COUNT(no_pinjaman)']);
   return $x;
 }
-
 ?>

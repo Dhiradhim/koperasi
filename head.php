@@ -1,4 +1,5 @@
-<?php  
+<?php 
+ini_set('display_errors', 0); 
 include ('koneksi.php');
 include ('fungsi.php');
 session_start();  
