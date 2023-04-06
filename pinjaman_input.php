@@ -26,7 +26,7 @@ include ('sidebar.php');
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label>Nama Peminjam</label>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                     <select class="form-control" required id="sel1" name="no_anggota">
                                                     <option value="" hidden>Pilih</option>
                                                 <?php 

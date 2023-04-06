@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_id=='1'){ 
+                                if ($session_role=='admin'){ 
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota AND p.no_anggota='$session_id'";
@@ -26,7 +26,8 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar Pinjaman</h2></center><br>
-                            <a href="pinjaman_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input Pinjaman</button></a><br><br>
+                            <a href="pinjaman_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input Pinjaman</button></a>
+                            <a href="laporan_pinjaman_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -43,7 +44,7 @@ include ('sidebar.php');
                                                 <th>Angsuran</th>
                                                 <th>Status</th>
                                                 <th>Status Pembayaran</th>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>
@@ -69,7 +70,7 @@ include ('sidebar.php');
                                                 <td><?=$angsuran_ke?> kali</td>
                                                 <td><?=status($status)?></td>
                                                 <td><?=status_pinjaman($no_pinjaman)?></td>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <td>
                                                 <button type="button" class="btn mb-1 btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                                 <div class="dropdown-menu">
@@ -99,7 +100,7 @@ include ('sidebar.php');
                                                 <th>Angsuran</th>
                                                 <th>Status</th>
                                                 <th>Status Pembayaran</th>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>

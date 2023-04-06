@@ -34,6 +34,32 @@ function status($stat){
     }
     return $hasil;
 }
+
+function status_cetak($stat){
+  if ($stat=='0'){
+    $hasil = '<p style="color:yellow;">Pending</p>';
+  } else if ($stat=='1'){
+    $hasil = '<p style="color:green;">Accepted</p>';
+  } else if ($stat=='2'){
+    $hasil = '<p style="color:red;">Denied</p>';
+  }
+  return $hasil;
+}
+function status_pinjaman_cetak($no_pinjaman){
+  include('koneksi.php');
+  $query = "SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjaman'";
+  $sql = mysqli_query($con, $query);
+  $data = mysqli_fetch_array($sql);
+  $query2 = "SELECT jml_pinjaman as jml2 FROM pinjaman WHERE no_pinjaman='$no_pinjaman'";
+  $sql2 = mysqli_query($con, $query2);
+  $data2 = mysqli_fetch_array($sql2);
+  if ($data2['jml2']==$data['jml']){
+    $hasil = '<p style="color:green;">Lunas</p>';
+  } else {
+    $hasil = '<p style="color:red;">Belum Lunas</p>';
+  }
+    return $hasil;
+}
 function status_pinjaman($no_pinjaman){
   include('koneksi.php');
   $query = "SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjaman'";
@@ -67,5 +93,22 @@ function angsuran_ke($no_pinjaman){
   $data = mysqli_fetch_assoc($sql);
   $x=($data['COUNT(no_pinjaman)']);
   return $x;
+}
+
+function jml_pinjaman($id){
+  include('koneksi.php');
+  $query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE no_anggota='$id' and status='1'";
+  $sql_pinjaman = mysqli_query($con, $query_pinjaman);
+  $data_pinjaman = mysqli_fetch_array($sql_pinjaman);
+  $total_pinjaman = $data_pinjaman['jml'];
+  return $total_pinjaman;
+}
+function jml_simpanan($id){
+  include('koneksi.php');
+  $query_simpanan = "SELECT SUM(jml_simpanan) as jml FROM simpanan WHERE no_anggota='$id'";
+  $sql_simpanan = mysqli_query($con, $query_simpanan);
+  $data_simpanan = mysqli_fetch_array($sql_simpanan);
+  $total_simpanan = $data_simpanan['jml'];
+  return $total_simpanan;
 }
 ?>

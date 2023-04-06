@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_id=='1'){
+                                if ($session_role=='admin'){
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman";
                                 } else {   
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman AND a.no_anggota='$session_id'";
@@ -26,9 +26,10 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar Pembayaran</h2></center><br>
-                            <?php if ($session_id=='1'){ ?>
-                            <a href="angsuran_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Tambah Pembayaran</button></a><br><br>
+                            <?php if ($session_role=='admin'){ ?>
+                            <a href="angsuran_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Tambah Pembayaran</button></a>
                             <?php } ?>
+                            <a href="laporan_angsuran_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -41,7 +42,7 @@ include ('sidebar.php');
                                                 <th>Tanggal Angsuran</th>
                                                 <th>Angsuran Ke</th>
                                                 <th>Jumlah Angsuran</th>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>
@@ -60,7 +61,7 @@ include ('sidebar.php');
                                                 <td><?=$tgl_angsuran?></td>
                                                 <td><?=$angsuran_ke?></td>
                                                 <td><?=rp($jml_angsuran)?></td>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <td>
                                                 <button type="button" class="btn mb-1 btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                                 <div class="dropdown-menu">
@@ -84,7 +85,7 @@ include ('sidebar.php');
                                                 <th>Angsuran Ke</th>
                                                 <th>Tanggal Angsuran</th>
                                                 <th>Jumlah Angsuran</th>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>

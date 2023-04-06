@@ -9,11 +9,12 @@ if(!$_SESSION['no_anggota'])
     header("Location: login.php"); 
 }  
 $x = $_SESSION['no_anggota'];
-$query_nama = "SELECT * FROM anggota WHERE no_anggota='$x'";
+$query_nama = "SELECT u.role, a.* FROM anggota as a, users as u WHERE a.no_anggota=u.no_anggota AND a.no_anggota='$x'";
 $sql_nama = mysqli_query($con, $query_nama);
 $data_nama = mysqli_fetch_array($sql_nama);
 $session_id = $data_nama['no_anggota'];
 $session_nama = $data_nama['nama_anggota'];
+$session_role = $data_nama['role'];
 
   
 ?> 

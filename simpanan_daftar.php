@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_id=='1') { 
+                                if ($session_role=='admin'){
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota AND s.no_anggota='$session_id'";
@@ -26,9 +26,10 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar simpanan</h2></center><br>
-                            <?php if ($session_id=='1'){ ?>
-                            <a href="simpanan_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input simpanan</button></a><br><br>
+                            <?php if ($session_role=='admin'){ ?>
+                            <a href="simpanan_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input simpanan</button></a>
                             <?php } ?>
+                            <a href="laporan_simpanan_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -39,7 +40,7 @@ include ('sidebar.php');
                                                 <th>No. Simpanan</th>
                                                 <th>Tanggal Simpanan</th>
                                                 <th>Jumlah Simpanan</th> 
-                                                <?php if ($session_id=='1'){ ?>    
+                                                <?php if ($session_role=='admin'){ ?>    
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>
@@ -57,7 +58,7 @@ include ('sidebar.php');
                                                 <td><?=kode_simpan($id,$tgl_simpanan)?></td>
                                                 <td><?=$tgl_simpanan?></td>
                                                 <td><?=$jml_simpanan2?></td>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <td>
                                                 <button type="button" class="btn mb-1 btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                                 <div class="dropdown-menu">
@@ -79,7 +80,7 @@ include ('sidebar.php');
                                                 <th>No. Simpanan</th>
                                                 <th>Tanggal Simpanan</th>
                                                 <th>Jumlah Simpanan</th>
-                                                <?php if ($session_id=='1'){ ?>
+                                                <?php if ($session_role=='admin'){ ?>
                                                 <th>Action</th>
                                                 <?php } ?>
                                             </tr>
