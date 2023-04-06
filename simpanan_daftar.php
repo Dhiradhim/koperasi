@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin'){
+                                if ($session_role=='admin' OR $session_role=='bendahara'){
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota AND s.no_anggota='$session_id'";
@@ -26,7 +26,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar simpanan</h2></center><br>
-                            <?php if ($session_role=='admin'){ ?>
+                            <?php if ($session_role=='admin' OR $session_role=='bendahara'){ ?>
                             <a href="simpanan_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input simpanan</button></a>
                             <?php } ?>
                             <a href="laporan_simpanan_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
@@ -47,7 +47,19 @@ include ('sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            do { 
+                                            if (empty($data['no_anggota'])){
+                                                ?>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <?php if ($session_role=='admin'){ ?>
+                                                <td></td>                                             
+                                                <?php  }
+                                            } else {
+                                                do { 
                                                 foreach($data as $key=>$value) {$$key=$value;}
                                                 $jml_simpanan2 = rp($jml_simpanan);
                                             ?>
@@ -71,6 +83,7 @@ include ('sidebar.php');
                                                 $no++; 
                                                 } 
                                                 while ($data = mysqli_fetch_array($sql));
+                                            }
                                             ?>
                                         <tfoot>
                                             <tr>

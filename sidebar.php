@@ -47,7 +47,7 @@
                     <li class="nav-label">Laporan</li>
                     
                     <li>
-                        <a href="laporan_keuangan.php?id=<?php if($session_role=='admin'){ echo 'all';} else { echo $session_id;} ?>" aria-expanded="false">
+                        <a href="laporan_keuangan.php?id=<?php if($session_role=='admin' OR $session_role=='bendahara'){ echo 'all';} else { echo $session_id;} ?>" aria-expanded="false">
                             <i class="fa-solid fa-file-invoice-dollar"></i><span class="nav-text">Laporan Keuangan</span>
                         </a>
                     </li>

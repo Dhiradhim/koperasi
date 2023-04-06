@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin'){ 
+                                if ($session_role=='admin' OR $session_role=='bendahara'){ 
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota AND p.no_anggota='$session_id'";
@@ -51,6 +51,23 @@ include ('sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php 
+                                            if (empty($data['no_anggota'])){
+                                                ?>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td><?php if ($session_role=='admin'){ ?>                                                
+                                                <td></td>                                                
+                                                <?php  }
+                                            } else {
                                             do { 
                                                 $totalbayar=totalbayar($data['no_pinjaman']);
                                                 $angsuran_ke=angsuran_ke($data['no_pinjaman']);
@@ -85,6 +102,7 @@ include ('sidebar.php');
                                                 $no++; 
                                                 } 
                                                 while ($data = mysqli_fetch_array($sql));
+                                            }
                                             ?>
                                         <tfoot>
                                             <tr>

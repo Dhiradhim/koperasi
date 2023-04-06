@@ -15,7 +15,7 @@ include ('sidebar.php');
                                 <br><br>
                                 <!-- QUERY -->
                                 <?php
-                                $query = "SELECT no_anggota, nama_anggota FROM anggota";
+                                $query = "SELECT u.role, a.no_anggota, a.nama_anggota FROM anggota as a, users as u WHERE a.no_anggota=u.no_anggota AND u.role='anggota'";
                                 $sql = mysqli_query($con, $query);
                                 $data = mysqli_fetch_array($sql);
                                 ?>
@@ -26,7 +26,7 @@ include ('sidebar.php');
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label>Nama Peminjam</label>
-                                                <?php if ($session_role=='admin'){ ?>
+                                                <?php if ($session_role=='admin' OR $session_role=='bendahara'){ ?>
                                                     <select class="form-control" required id="sel1" name="no_anggota">
                                                     <option value="" hidden>Pilih</option>
                                                 <?php 

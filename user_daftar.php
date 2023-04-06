@@ -41,7 +41,20 @@ include ('sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            do { 
+                                            if (empty($data['no_anggota'])){
+                                                ?>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <?php if ($session_role=='admin'){ ?>                                             
+                                                <td></td>                                             
+                                                <?php  }
+                                            } else {
+                                                do { 
                                                 foreach($data as $key=>$value) {$$key=$value;}
                                             ?>
                                             <tr>
@@ -63,6 +76,7 @@ include ('sidebar.php');
                                                 $no++; 
                                                 } 
                                                 while ($data = mysqli_fetch_array($sql));
+                                            }
                                             ?>
                                         <tfoot>
                                             <tr>

@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin'){
+                                if ($session_role=='admin' OR $session_role=='bendahara'){
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman";
                                 } else {   
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman AND a.no_anggota='$session_id'";
@@ -26,7 +26,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar Pembayaran</h2></center><br>
-                            <?php if ($session_role=='admin'){ ?>
+                            <?php if ($session_role=='admin' OR $session_role=='bendahara'){ ?>
                             <a href="angsuran_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Tambah Pembayaran</button></a>
                             <?php } ?>
                             <a href="laporan_angsuran_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
@@ -49,7 +49,21 @@ include ('sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            do { 
+                                            if (empty($data['no_anggota'])){
+                                                ?>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <?php if ($session_role=='admin'){ ?>
+                                                <td></td>                                         
+                                                <?php  }
+                                            } else {
+                                                do { 
                                                 foreach($data as $key=>$value) {$$key=$value;}
                                             ?>
                                             <tr>
@@ -74,6 +88,7 @@ include ('sidebar.php');
                                                 $no++; 
                                                 } 
                                                 while ($data = mysqli_fetch_array($sql));
+                                            }
                                             ?>
                                         <tfoot>
                                             <tr>

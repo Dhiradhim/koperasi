@@ -1,7 +1,7 @@
 <?php
 include ('head.php');
 include ('sidebar.php');
-if ($session_id==1){
+if ($session_role=='admin' OR $session_role=='bendahara'){
 // DASHBOARD ANGGOTA
 $query_anggota = "SELECT COUNT(*) FROM anggota WHERE id > 1";
 $sql_anggota = mysqli_query($con, $query_anggota);
@@ -14,13 +14,13 @@ $data_simpanan = mysqli_fetch_array($sql_simpanan);
 $total_simpanan = $data_simpanan['jml'];
 
 // DASHBOARD PINJAMAN
-$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman";
+$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE status='1'";
 $sql_pinjaman = mysqli_query($con, $query_pinjaman);
 $data_pinjaman = mysqli_fetch_array($sql_pinjaman);
 $total_pinjaman = $data_pinjaman['jml'];
 
 // DASHBOARD LUNAS/BELOM LUNAS
-$query_pinjam = "SELECT no_pinjaman FROM pinjaman";
+$query_pinjam = "SELECT no_pinjaman FROM pinjaman WHERE status='1'";
 $sql_pinjam = mysqli_query($con, $query_pinjam);
 $data_pinjam = mysqli_fetch_array($sql_pinjam);
 $belum_lunas = 0;
@@ -30,13 +30,15 @@ do{
     $query_lunas = "SELECT no_pinjaman, jml_pinjaman, (SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjam') as angsuran FROM pinjaman WHERE no_pinjaman='$no_pinjam'";
     $sql_lunas = mysqli_query($con, $query_lunas);
     $data_lunas = mysqli_fetch_array($sql_lunas);
-    if ($data_lunas['jml_pinjaman']==$data_lunas['angsuran']){
+    if (empty($data_lunas['jml_pinjaman'])){
+
+    } else if ($data_lunas['jml_pinjaman']==$data_lunas['angsuran']){
         $lunas = $lunas + 1;
     } else {
         $belum_lunas = $belum_lunas + 1;
     }
 } while ($data_pinjam = mysqli_fetch_array($sql_pinjam));
-} else{
+} else {
 // DASHBOARD SIMPANAN
 $query_simpanan = "SELECT SUM(jml_simpanan) as jml FROM simpanan WHERE no_anggota='$session_id'";
 $sql_simpanan = mysqli_query($con, $query_simpanan);
@@ -44,7 +46,7 @@ $data_simpanan = mysqli_fetch_array($sql_simpanan);
 $total_simpanan = $data_simpanan['jml'];
 
 // DASHBOARD PINJAMAN
-$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE no_anggota='$session_id'";
+$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE no_anggota='$session_id' AND status='1'";
 $sql_pinjaman = mysqli_query($con, $query_pinjaman);
 $data_pinjaman = mysqli_fetch_array($sql_pinjaman);
 $total_pinjaman = $data_pinjaman['jml'];
@@ -66,7 +68,7 @@ $total_angsuran = $data_angsuran['jml'];
                 </div>
             </div>
             <!-- row -->
-           <?php if ($session_id==1){ ?> 
+           <?php if ($session_role=='admin' OR $session_role=='bendahara'){ ?> 
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-lg-4 col-sm-6">
@@ -142,9 +144,9 @@ $total_angsuran = $data_angsuran['jml'];
                                 <h3 class="card-title text-white">Jumlah Simpanan</h3>
                                 <div class="d-inline-block">
                                     <h2 class="text-white"><?=rp($total_simpanan)?></h2>
-                                    <p class="text-white mb-0">orang</p>
+                                    <p class="text-white mb-0"></p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-users"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-vault"></i></span>
                             </div>
                         </div>
                     </div>
@@ -156,7 +158,7 @@ $total_angsuran = $data_angsuran['jml'];
                                     <h2 class="text-white"><?=rp($total_pinjaman)?></h2>
                                     <p class="text-white mb-0"></p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-vault"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-hand-holding-dollar"></i></span>
                             </div>
                         </div>
                     </div>
@@ -168,7 +170,7 @@ $total_angsuran = $data_angsuran['jml'];
                                     <h2 class="text-white"><?=rp($total_angsuran)?></h2>
                                     <p class="text-white mb-0"></p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa-solid fa-money"></i></span>
                             </div>
                         </div>
                     </div>

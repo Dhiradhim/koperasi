@@ -27,7 +27,7 @@
     $session_nama = $data_nama['nama_anggota'];
     $session_role = $data_nama['role'];
     $no = 1;
-    if ($session_role=='admin'){ 
+    if ($session_role=='admin' OR $session_role=='bendahara'){ 
         $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota";
     } else {
         $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota AND p.no_anggota='$session_id'";
