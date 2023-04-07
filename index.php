@@ -3,7 +3,7 @@ include ('head.php');
 include ('sidebar.php');
 if ($session_role=='admin' OR $session_role=='bendahara'){
 // DASHBOARD ANGGOTA
-$query_anggota = "SELECT COUNT(*) FROM anggota WHERE id > 1";
+$query_anggota = "SELECT COUNT(*) FROM users WHERE role='anggota'";
 $sql_anggota = mysqli_query($con, $query_anggota);
 $data_anggota = mysqli_fetch_array($sql_anggota);
 
