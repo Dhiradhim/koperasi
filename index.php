@@ -14,10 +14,28 @@ $data_simpanan = mysqli_fetch_array($sql_simpanan);
 $total_simpanan = $data_simpanan['jml'];
 
 // DASHBOARD PINJAMAN
-$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE status='1'";
-$sql_pinjaman = mysqli_query($con, $query_pinjaman);
-$data_pinjaman = mysqli_fetch_array($sql_pinjaman);
-$total_pinjaman = $data_pinjaman['jml'];
+$query_pinjam = "SELECT no_pinjaman FROM pinjaman WHERE status='1'";
+$sql_pinjam = mysqli_query($con, $query_pinjam);
+$data_pinjam = mysqli_fetch_array($sql_pinjam);
+
+$query_pinjam1 = "SELECT SUM(jml_pinjaman) as total_pinjaman FROM pinjaman WHERE status='1'";
+$sql_pinjam1 = mysqli_query($con, $query_pinjam1);
+$data_pinjam1 = mysqli_fetch_array($sql_pinjam1);
+$total_pinjaman_lunas = 0;
+do{
+    $no_pinjam = $data_pinjam['no_pinjaman'];
+    $query_lunas = "SELECT no_pinjaman, jml_pinjaman, (SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjam') as angsuran FROM pinjaman WHERE no_pinjaman='$no_pinjam'";
+    $sql_lunas = mysqli_query($con, $query_lunas);
+    $data_lunas = mysqli_fetch_array($sql_lunas);
+    if (empty($data_lunas['jml_pinjaman'])){
+
+    } else if ($data_lunas['jml_pinjaman']==$data_lunas['angsuran']){
+        $total_pinjaman_lunas = $total_pinjaman_lunas + $data_lunas['jml_pinjaman'];
+    } else {
+        $total_pinjaman_lunas = $total_pinjaman_lunas;
+    }
+} while ($data_pinjam = mysqli_fetch_array($sql_pinjam));
+$total_pinjaman = $data_pinjam1['total_pinjaman'] - $total_pinjaman_lunas;
 
 // DASHBOARD LUNAS/BELOM LUNAS
 $query_pinjam = "SELECT no_pinjaman FROM pinjaman WHERE status='1'";
@@ -46,16 +64,35 @@ $data_simpanan = mysqli_fetch_array($sql_simpanan);
 $total_simpanan = $data_simpanan['jml'];
 
 // DASHBOARD PINJAMAN
-$query_pinjaman = "SELECT SUM(jml_pinjaman) as jml FROM pinjaman WHERE no_anggota='$session_id' AND status='1'";
-$sql_pinjaman = mysqli_query($con, $query_pinjaman);
-$data_pinjaman = mysqli_fetch_array($sql_pinjaman);
-$total_pinjaman = $data_pinjaman['jml'];
+$query_pinjam = "SELECT no_pinjaman FROM pinjaman WHERE no_anggota='$session_id' AND status='1'";
+$sql_pinjam = mysqli_query($con, $query_pinjam);
+$data_pinjam = mysqli_fetch_array($sql_pinjam);
+
+$query_pinjam1 = "SELECT SUM(jml_pinjaman) as total_pinjaman FROM pinjaman WHERE no_anggota='$session_id' AND status='1'";
+$sql_pinjam1 = mysqli_query($con, $query_pinjam1);
+$data_pinjam1 = mysqli_fetch_array($sql_pinjam1);
+$total_pinjaman_lunas = 0;
+do{
+    $no_pinjam = $data_pinjam['no_pinjaman'];
+    $query_lunas = "SELECT no_pinjaman, jml_pinjaman, (SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_pinjaman='$no_pinjam') as angsuran FROM pinjaman WHERE no_pinjaman='$no_pinjam'";
+    $sql_lunas = mysqli_query($con, $query_lunas);
+    $data_lunas = mysqli_fetch_array($sql_lunas);
+    if (empty($data_lunas['jml_pinjaman'])){
+
+    } else if ($data_lunas['jml_pinjaman']==$data_lunas['angsuran']){
+        $total_pinjaman_lunas = $total_pinjaman_lunas + $data_lunas['jml_pinjaman'];
+    } else {
+        $total_pinjaman_lunas = $total_pinjaman_lunas;
+    }
+} while ($data_pinjam = mysqli_fetch_array($sql_pinjam));
+$total_pinjaman = $data_pinjam1['total_pinjaman'] - $total_pinjaman_lunas;
 
 // DASHBOARD ANGSURAN
 $query_angsuran = "SELECT SUM(jml_angsuran) as jml FROM angsuran WHERE no_anggota='$session_id'";
 $sql_angsuran = mysqli_query($con, $query_angsuran);
 $data_angsuran = mysqli_fetch_array($sql_angsuran);
-$total_angsuran = $data_angsuran['jml'];
+$total_angsuran = $data_angsuran['jml']-$total_pinjaman_lunas;
+
 }
 ?>
         <!--**********************************
