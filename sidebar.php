@@ -27,7 +27,8 @@
                             <li><a href="./user_daftar.php?role=bendahara">Bendahara</a></li>
                             <li><a href="./user_daftar.php?role=anggota">Anggota</a></li>
                         </ul>
-                    </li><?php } ?>
+                    </li><?php } 
+                    if ($session_role=='admin' OR $session_role=='anggota'){?>
                     <li class="nav-label">Transaksi</li>
                     <li>
                         <a href="simpanan_daftar.php" aria-expanded="false">
@@ -44,6 +45,7 @@
                             <i class="fa-solid fa-money-bill-wave"></i><span class="nav-text">Pembayaran</span>
                         </a>
                     </li>
+                    <?php } ?>
                     <li class="nav-label">Laporan</li>
                     
                     <li>
