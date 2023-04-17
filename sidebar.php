@@ -24,11 +24,12 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="./user_daftar.php?role=admin">Administrator</a></li>
+                            <li><a href="./user_daftar.php?role=kepala koperasi">Kepala Koperasi</a></li>
                             <li><a href="./user_daftar.php?role=bendahara">Bendahara</a></li>
                             <li><a href="./user_daftar.php?role=anggota">Anggota</a></li>
                         </ul>
                     </li><?php } 
-                    if ($session_role=='admin' OR $session_role=='anggota'){?>
+                    if ($session_role=='admin' OR $session_role=='anggota' OR $session_role=='kepala koperasi'){?>
                     <li class="nav-label">Transaksi</li>
                     <li>
                         <a href="simpanan_daftar.php" aria-expanded="false">
@@ -49,7 +50,7 @@
                     <li class="nav-label">Laporan</li>
                     
                     <li>
-                        <a href="laporan_keuangan.php?id=<?php if($session_role=='admin' OR $session_role=='bendahara'){ echo 'all';} else { echo $session_id;} ?>" aria-expanded="false">
+                        <a href="laporan_keuangan.php?id=<?php if($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){ echo 'all';} else { echo $session_id;} ?>" aria-expanded="false">
                             <i class="fa-solid fa-file-invoice-dollar"></i><span class="nav-text">Laporan Keuangan</span>
                         </a>
                     </li>

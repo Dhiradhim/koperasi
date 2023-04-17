@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin' OR $session_role=='bendahara'){
+                                if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct s.*, a.nama_anggota as nama FROM simpanan as s, anggota as a WHERE s.no_anggota=a.no_anggota AND s.no_anggota='$session_id'";

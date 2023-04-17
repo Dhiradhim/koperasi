@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin' OR $session_role=='bendahara'){
+                                if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman";
                                 } else {   
                                     $query = "SELECT a.*, an.nama_anggota, p.tgl_pinjaman FROM angsuran as a, anggota as an, pinjaman as p WHERE a.no_anggota=an.no_anggota AND p.no_pinjaman=a.no_pinjaman AND a.no_anggota='$session_id'";

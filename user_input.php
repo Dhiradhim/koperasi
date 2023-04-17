@@ -29,7 +29,7 @@ include ('sidebar.php');
                                             <div class="form-group col-md-4">
                                                 <label>Username</label>
                                                 <input type="text" required class="form-control" name="user_id" placeholder="Username">
-                                                <input type="text" hidden required class="form-control" name="role" value=<?=$role?>>
+                                                <input type="text" required class="form-control" name="role" value=<?=$role?>>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>Password</label>

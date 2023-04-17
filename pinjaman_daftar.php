@@ -15,7 +15,7 @@ include ('sidebar.php');
                             <!-- QUERY -->
                             <?php
                                 $no = 1;
-                                if ($session_role=='admin' OR $session_role=='bendahara'){ 
+                                if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){ 
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota";
                                 } else {
                                     $query = "SELECT distinct p.*, a.nama_anggota as nama FROM pinjaman as p, anggota as a WHERE p.no_anggota=a.no_anggota AND p.no_anggota='$session_id'";
@@ -26,7 +26,10 @@ include ('sidebar.php');
                             <!-- QUERY -->
 
                             <center><h2>Daftar Pinjaman</h2></center><br>
+                            <?php
+                            if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='anggota'){ ?>
                             <a href="pinjaman_input.php"><button type="button" class="btn mb-1 btn-primary btn-sm">Input Pinjaman</button></a>
+                            <?php } ?>
                             <a href="laporan_pinjaman_cetak.php" target="_blank"><button type="button" class="btn mb-1 btn-success btn-sm">Cetak Laporan</button></a><br><br>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">

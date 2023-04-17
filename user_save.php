@@ -33,6 +33,9 @@ if ($count>0){
 	echo '<script type="text/javascript">alert("Password Tidak Sesuai");</script>';
 	echo '<script>window.history.back();</script>';
 }else{
+    if ($role=='kepala'){
+        $role = 'kepala koperasi';
+    }
     $query = "INSERT into users (user_id,password,role) values ('$user_id', '$password','$role')";
     $sql=mysqli_query($con, $query);
 
@@ -42,6 +45,7 @@ if ($count>0){
     $no_anggota = $data['no_anggota'];
 
     $query = "INSERT into anggota (no_anggota,no_karyawan,nama_anggota,jk,tempat_lahir,tgl_lahir,nohp,alamat) values ('$no_anggota', '$no_karyawan', '$nama_anggota', '$jk', '$tempat_lahir', '$tgl_lahir', '$nohp', '$alamat')";
+    // echo $query;
     $sql=mysqli_query($con, $query);
     echo '<script type="text/javascript">alert("Pendaftaran '. ucfirst($role).' Berhasil.");</script>';
     echo '<script>window.location.href="user_daftar.php?role='. $role .'"</script>';

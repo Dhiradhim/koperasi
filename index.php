@@ -1,7 +1,7 @@
 <?php
 include ('head.php');
 include ('sidebar.php');
-if ($session_role=='admin' OR $session_role=='bendahara'){
+if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){
 // DASHBOARD ANGGOTA
 $query_anggota = "SELECT COUNT(*) FROM users WHERE role='anggota'";
 $sql_anggota = mysqli_query($con, $query_anggota);
@@ -105,7 +105,7 @@ $total_angsuran = $data_angsuran['jml']-$total_pinjaman_lunas;
                 </div>
             </div>
             <!-- row -->
-           <?php if ($session_role=='admin' OR $session_role=='bendahara'){ ?> 
+           <?php if ($session_role=='admin' OR $session_role=='bendahara' OR $session_role=='kepala koperasi'){ ?> 
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-lg-4 col-sm-6">
